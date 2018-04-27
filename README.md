@@ -6,13 +6,18 @@ Add your answers inline, below, with your pull request.
 
 1. List all of the main states a process may be in at any point in time on a
    standard Unix system. Briefly explain what each of these states mean.
+   -Start: process is initialized
+   -Ready: process has been loaded into main memory and waits for execution on CPU.
+   -Running: process moves to running state when chosen for execution
+   -Blocked:  process goes to blocked state when it needs an external change in states
+   -Terminated: process can be terminated from running state either by completing its executing or being killed.
 
 2. What is a Zombie Process? How does it get created? How does it get destroyed?
-
+  -A zombie process is one that completed execution but still has an entry in the process table (in the terminated state). These happen for child processes where entry is needed to allow the parent process to read its child's exist status. A child process becomes a zombie before being removed from the resource table.
 3. Describe the job of the Scheduler in the OS in general.
-
+  - Maximizing the total amount of work completed per time unit, minimizing wait time, minimizing latency/response time
 4. Describe the benefits of the MLFQ over a plain Round-Robin scheduler.
-
+  -MLFQ: if a process uses too much CPU time it will be moved to a lower priority queue, RR: time slices are assigned to each process in equal portions and in circular order (all processes don't have priority)
 ## Programming Exercise: The Lambda School Shell (`lssh`)
 
 Important Safety Tip: Resist the urge to start coding until you:
@@ -35,7 +40,7 @@ the user types in their names. And also the shell should be able to run _any_
 command, not just `ls` and `head`.**
 
 ```
-[bash]$ ./lssh 
+[bash]$ ./lssh
 lambda-shell$ ls -l
 total 32
 -rwxr-xr-x  1 beej  staff  9108 Mar 15 13:28 lssh
@@ -52,7 +57,7 @@ lambda-shell$ head lssh.c
 #define COMMANDLINE_BUFSIZE 1024
 #define DEBUG 0  // Set to 1 to turn on some debugging output
 lambda-shell$ exit
-[bash]$ 
+[bash]$
 ```
 
 General plan of attack is to:
@@ -118,7 +123,7 @@ lambda-shell$ pwd
 /Users/example
 lambda-shell$ cd foobar
 chdir: No such file or directory
-lambda-shell$ 
+lambda-shell$
 ```
 
 If the user entered `cd` as the first argument:
